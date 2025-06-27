@@ -1,47 +1,25 @@
-# Retail_PBM (Predictive Behavior Model)
+# Retail_PBM (Profitability & Behavior Model)
 
-The primary goal of this project is to optimize retail profitability by directly addressing a key challenge: product waste. By analyzing historical sales data, this model identifies trends and forecasts future demand for perishable goods, such as tomatoes. 
+## Project Overview
 
-These accurate forecasts enable smarter stock management, ensuring that purchases are aligned with expected sales. This process minimizes losses from unsold, expired products (waste margin adjustment) and prevents lost sales due to stockouts, ultimately leading to improved profit margins and optimized sales performance.
+This project is a comprehensive analysis dashboard for the tomato department of a retail business. It processes daily sales and stock data from a CSV file to generate a full report on business performance, combining both financial profitability over time and individual product performance.
 
----
+The main goal is to provide actionable insights to optimize purchasing, reduce waste, and improve overall profit margins by understanding what products are key sellers and which ones are most profitable.
 
-## Features
+## Key Features
 
-- **Universal Applicability:** While this demo uses tomato sales, the model's logic can be applied to **any product section** in a retail environment (e.g., bakery, dairy, butchery) to optimize stock and reduce waste.
+- **Data Loading:** Imports sales data from a `sales_data.csv` file. Handles data with headers in both English and Spanish.
+- **Financial Calculation:** Computes crucial metrics like Revenue, Gross Profit, Potential Waste (unsold stock), and an estimated Net Profit after accounting for waste costs.
+- **Time-Based Analysis:** Generates a financial report aggregated by month and by week, allowing for performance tracking over time.
+- **Product-Based Analysis:** Creates a detailed report on each tomato variety, identifying best/worst sellers by quantity and most/least profitable products.
+- **Visualization:** Produces clear bar charts to visually compare the total quantity sold and the total net profit for each product variety.
 
-- **Bilingual Data Ingestion:** The script is designed to seamlessly load `.csv` data files with headers in either **English or Spanish**, making it highly adaptable to different system configurations.
+## How to Run
 
-- **System Agnostic:** Easily integrates with **any environment or Point of Sale (POS) system** capable of exporting daily or transactional sales data to a `.csv` file.
-
-- **Automated EDA & Financial Metrics:** Automatically calculates key metrics like Revenue, Cost, and Profit, and performs an exploratory data analysis to identify top and bottom-performing products.
-
-- **Clear Data Visualization:** Generates easy-to-understand charts summarizing sales performance and profitability, allowing for quick business insights.
-
----
-
-## Technologies Used
-
-- **Python:** The core programming language.
-- **Pandas:** For data manipulation and analysis.
-- **Matplotlib & Seaborn:** For data visualization.
-- **Scikit-learn:** (Will be used for the prediction model in future steps).
-
----
-
-## How to Run the Project
-
-1.  **Prerequisites:** Make sure you have Python and the required libraries installed:
-    ```bash
-    pip install pandas matplotlib seaborn
-    ```
-2.  **Clone the repository (or download the files).**
-3.  **Navigate to the project folder** in your terminal:
-    ```bash
-    cd path/to/Retail_PBM
-    ```
-4.  **Execute the script:**
+1.  Ensure you have Python and the required libraries installed: `pip install pandas matplotlib seaborn`.
+2.  Make sure your sales data is correctly formatted in the `sales_data.csv` file within the project folder.
+3.  Open a terminal inside the project folder and run the main script:
     ```bash
     python predictive_model.py
     ```
-The script will print the analysis results in the console and display two plots.
+4.  Review the text-based reports in the terminal and the plot windows that appear.
