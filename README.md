@@ -4,7 +4,7 @@
 
 This project is a dual-purpose data analysis tool for a retail environment, using tomato sales as a case study. It functions both as a **comprehensive profitability dashboard** and as the initial data pipeline for a **sales prediction model**.
 
-The primary goal is to provide a 360-degree view of the business, answering both "How did we perform?" and "What do we need to prepare for what might happen next?".
+The primary goal is to provide a 360-degree view of the business, answering both "Where can we adjust for better performance?" "How can we anticipate with the data obtained?" The data does not have to be repeated; past events do not guarantee that they will happen again, but they are the best tool for making increasingly accurate predictions
 
 ---
 
