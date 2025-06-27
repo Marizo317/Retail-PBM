@@ -1,23 +1,42 @@
-# Retail_PBM (Profitability & Behavior Model)
+# Retail_PBM (Profitability & Predictive Behavior Model)
 
-## Project Overview
+## Project Summary
 
-This project is a comprehensive analysis dashboard for the tomato department of a retail business. It processes daily sales and stock data from a CSV file to generate a full report on business performance, combining both financial profitability over time and individual product performance.
+This project is a dual-purpose data analysis tool for a retail environment, using tomato sales as a case study. It functions both as a **comprehensive profitability dashboard** and as the initial data pipeline for a **sales prediction model**.
 
-The main goal is to provide actionable insights to optimize purchasing, reduce waste, and improve overall profit margins by understanding what products are key sellers and which ones are most profitable.
+The primary goal is to provide a 360-degree view of the business, answering both "How did we perform?" and "What do we need to prepare for what might happen next?".
+
+---
 
 ## Key Features
 
-- **Data Loading:** Imports sales data from a `sales_data.csv` file. Handles data with headers in both English and Spanish.
-- **Financial Calculation:** Computes crucial metrics like Revenue, Gross Profit, Potential Waste (unsold stock), and an estimated Net Profit after accounting for waste costs.
-- **Time-Based Analysis:** Generates a financial report aggregated by month and by week, allowing for performance tracking over time.
-- **Product-Based Analysis:** Creates a detailed report on each tomato variety, identifying best/worst sellers by quantity and most/least profitable products.
-- **Visualization:** Produces clear bar charts to visually compare the total quantity sold and the total net profit for each product variety.
+The project is currently divided into two main functional areas:
+
+### 1. Profitability Analysis Dashboard
+
+This module provides a detailed report on business performance based on historical sales data.
+
+- **Financial Metrics:** Automatically calculates essential KPIs like Revenue, Gross Profit, Potential Waste (from unsold stock), and Net Profit.
+- **Time-Based Reporting:** Aggregates financial data to generate clear monthly and weekly performance summaries.
+- **Product Performance Analysis:** Groups data by product variety to identify:
+    - Top & Bottom 3 best-sellers by quantity.
+    - Top 3 most profitable products.
+- **Data Visualization:** Generates clear bar charts to visually compare product performance in terms of total units sold and net profitability.
+
+### 2. Predictive Modeling Pipeline (Data Preparation)
+
+This module prepares the raw sales data and transforms it into a "model-ready" dataset, suitable for training a machine learning algorithm. This process is also known as Feature Engineering.
+
+- **Time-Based Features:** Deconstructs dates into numerical features (e.g., day of the week, week of the year, month) to help the model learn cyclical patterns.
+- **Lag Features:** Creates features based on past values (e.g., sales of a product from the previous day), which are highly indicative of future sales.
+- **Categorical Encoding:** Converts text-based features like product variety into a numerical format (One-Hot Encoding) that machine learning models can understand.
+
+---
 
 ## How to Run
 
 1.  Ensure you have Python and the required libraries installed: `pip install pandas matplotlib seaborn`.
-2.  Make sure your sales data is correctly formatted in the `sales_data.csv` file within the project folder.
+2.  Make sure your sales data is correctly formatted in the `sales_data.csv` file.
 3.  Open a terminal inside the project folder and run the main script:
     ```bash
     python predictive_model.py
