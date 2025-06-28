@@ -4,11 +4,15 @@
 
 This project is a dual-purpose data analysis tool for a retail environment, using tomato sales as a case study. It functions as both a **comprehensive profitability dashboard** and a **machine learning pipeline** that trains a model to predict future sales.
 
-The primary goal is to provide a 360-degree view of the business, answering "How did we perform?" with the analysis dashboard, and "What can we expect to happen?" with the predictive model.
+The primary goal is to provide a 360-degree view of the business, answering both "How did we perform?" and "What do we need to prepare for what might happen next?".
 
 ---
 
-## Part 1: Profitability Analysis Dashboard
+## Key Features
+
+The project is currently divided into two main functional areas:
+
+### 1. Profitability Analysis Dashboard
 
 This module provides a detailed report on business performance based on historical sales data.
 
