@@ -13,7 +13,8 @@ The primary goal is to provide a 360-degree view of the business, answering "How
 This module provides a detailed report on business performance based on historical sales data.
 
 - **Financial Metrics:** Automatically calculates KPIs like Revenue, Gross Profit, and Net Profit after accounting for the cost of unsold stock (waste).
-- **Time-Based Reporting:** Aggregates financial data to generate clear monthly and weekly financial summaries.
+- **Time-Based Reporting:** Aggregates financial data to generate clear monthly and weekly performance summaries.
+    - **Key Feature:** The script analyzes Net Profit and **returns a clear status (e.g.,  PROFITABLE /  NOT PROFITABLE)** for each period.
 - **Product Performance Analysis:** Groups data by product variety to generate a detailed report, including:
     - A full performance table with sales, gross profit, waste cost, and net profit per variety.
     - The explicit **Top 3 & Bottom 3** best-selling products by quantity.
@@ -43,15 +44,6 @@ The final step in the pipeline uses the trained model to generate concrete, acti
 
 - **Process:** The script forecasts sales for the day following the last date in the dataset. It does this for each product variety by constructing the necessary features (last day's sales, day of the week, etc.) and feeding them to the model.
 - **Output:** The result is a clear, easy-to-read table that provides a specific stock recommendation for each product.
-
-**Example of Final Output:**
-
-| Variety | Predicted_Sales_kg | Recommendation |
-| :--- | :--- | :--- |
-| Ensalada | 52.34 | Stock at least 57.34 kg |
-| Pera | 46.12 | Stock at least 51.12 kg |
-| Rama | 41.50 | Stock at least 46.50 kg |
-| ... | ... | ... |
 
 ---
 

@@ -1,5 +1,5 @@
 # Retail_PBM - Comprehensive Dashboard & Predictive Model
-# Final Version (Corrected): Includes Analysis, Training, and Future Prediction
+# Final Version: Includes Analysis, Training, and Future Prediction
 
 # --- 1. IMPORT LIBRARIES ---
 import pandas as pd
@@ -37,16 +37,33 @@ def run_profitability_analysis(df):
     
     # --- Part 1: Time-Based Financial Report ---
     df_time_analysis = df.set_index('Date')
+    
+    # -- Monthly Analysis --
     monthly_profit = df_time_analysis['Profit'].sum()
     monthly_waste_cost = df_time_analysis['Waste_Cost'].sum()
     monthly_net_profit = monthly_profit - monthly_waste_cost
+    monthly_profit_status = " PROFITABLE" if monthly_net_profit > 0 else " NOT PROFITABLE"
     
     print("\n----------------- MONTHLY SUMMARY -----------------")
-    print(f"ESTIMATED MONTHLY NET PROFIT: €{monthly_net_profit:.2f}")
+    print(f"Estimated Monthly Net Profit: €{monthly_net_profit:.2f}")
+    print(f"Monthly Status: {monthly_profit_status}")
     print("---------------------------------------------------")
 
+    # -- Weekly Analysis --
+    weekly_summary = df_time_analysis.resample('W-Mon').agg(
+        Weekly_Gross_Profit=('Profit', 'sum'),
+        Weekly_Waste_Cost=('Waste_Cost', 'sum')
+    )
+    weekly_summary['Weekly_Net_Profit'] = weekly_summary['Weekly_Gross_Profit'] - weekly_summary['Weekly_Waste_Cost']
+    weekly_summary['Is_Profitable'] = weekly_summary['Weekly_Net_Profit'].apply(lambda x: "✅ Yes" if x > 0 else "❌ No")
+    
+    print("\n\n----------------- WEEKLY SUMMARY -----------------")
+    weekly_summary.index = weekly_summary.index.strftime('Week of %Y-%m-%d')
+    print(weekly_summary[['Weekly_Net_Profit', 'Is_Profitable']])
+    print("--------------------------------------------------")
+
     # --- Part 2: Product-Based Performance Report ---
-    print("\n--- PRODUCT PERFORMANCE REPORT ---")
+    print("\n\n--- PRODUCT PERFORMANCE REPORT ---")
     
     performance_by_variety = df.groupby('Variety').agg(
         Total_Quantity_Sold=('Quantity_Sold_kg', 'sum'),
@@ -59,7 +76,6 @@ def run_profitability_analysis(df):
     print("\nFull Performance Table by Variety:")
     print(performance_by_variety)
 
-    # --- THIS IS THE RESTORED SECTION ---
     top_3_best_sellers_by_qty = performance_by_variety['Total_Quantity_Sold'].head(3)
     top_3_worst_sellers_by_qty = performance_by_variety['Total_Quantity_Sold'].tail(3)
     top_3_most_profitable = performance_by_variety.sort_values(by='Total_Net_Profit', ascending=False)['Total_Net_Profit'].head(3)
@@ -72,8 +88,6 @@ def run_profitability_analysis(df):
 
     print("\n Top 3 Most Profitable (by Net Profit):")
     print(top_3_most_profitable)
-    # --- END OF RESTORED SECTION ---
-
 
 def run_feature_engineering(df):
     """Prepares the data for machine learning by creating numerical features."""
