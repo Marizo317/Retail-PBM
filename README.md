@@ -2,55 +2,56 @@
 
 ## Project Summary
 
-This project is a dual-purpose data analysis tool for a retail environment, using tomato sales as a case study. It functions as both a **comprehensive profitability dashboard** and a **machine learning pipeline** that trains a model to predict future sales.
+This project is a dual-purpose data analysis tool for a retail environment, using tomato sales as a case study. It functions as both a **comprehensive profitability dashboard** and a **complete machine learning pipeline** that trains a model and uses it to predict future sales.
 
-The primary goal is to provide a 360-degree view of the business, answering both "How did we perform?" and "What do we need to prepare for what might happen next?".
+The primary goal is to provide a 360-degree view of the business, answering "How did we perform?" with the analysis dashboard, and "What should we stock for tomorrow?" with actionable, data-driven recommendations.
 
 ---
 
-## Key Features
-
-The project is currently divided into two main functional areas:
-
-### 1. Profitability Analysis Dashboard
+## Part 1: Profitability Analysis Dashboard
 
 This module provides a detailed report on business performance based on historical sales data.
 
 - **Financial Metrics:** Automatically calculates KPIs like Revenue, Gross Profit, and Net Profit after accounting for the cost of unsold stock (waste).
-- **Time-Based Reporting:** Generates clear monthly and weekly financial summaries.
-- **Product Performance Analysis:** Identifies top/bottom selling products by quantity and profitability.
+- **Time-Based Reporting:** Aggregates financial data to generate clear monthly and weekly financial summaries.
+- **Product Performance Analysis:** Groups data by product variety to generate a detailed report, including:
+    - A full performance table with sales, gross profit, waste cost, and net profit per variety.
+    - The explicit **Top 3 & Bottom 3** best-selling products by quantity.
+    - The **Top 3** most profitable products by net profit.
 - **Data Visualization:** Produces bar charts to visually compare product performance.
 
 ---
 
-## Part 2: Sales Prediction Model
+## Part 2: Sales Prediction Pipeline
 
-This module uses the historical data to train a `RandomForestRegressor` model to forecast future sales volume (in kg) for each tomato variety.
+This module uses the historical data to train a `RandomForestRegressor` model and then uses it to forecast future sales volume.
 
 ### Model Performance & Insights
 
-After training the model on 80% of the data and testing it on a hidden 20% set, we obtained the following results:
+After training, the model's performance was evaluated on a hidden test set:
 
 | Metric | Score | Interpretation |
 | :--- | :--- | :--- |
 | **R-squared (R²)** | `0.87` | The model successfully explains **87%** of the variance in daily sales. This indicates a very strong fit. |
 | **Mean Absolute Error (MAE)** | `2.32 kg` | On average, the model's prediction is off by **±2.32 kg** from the actual sales figure. This is our real-world margin of error. |
-| **Out-of-Bag (OOB) Score** | `0.96` | An internal model validation score. This high value confirms that the model generalizes well and is not "memorizing" the data. |
 
-### The "Secret" of the Model: Feature Importance
+The model's most important features were **yesterday's sales (`sales_lag_1_day`)** and the **day of the week (`day_of_week`)**, confirming that sales are driven by recent momentum and weekly seasonality.
 
-We asked the model which clues (features) it found most important for making its predictions. The results reveal the core logic of our sales patterns:
+### Forecasting & Business Recommendations
 
-1.  **`sales_lag_1_day` (Importance: 77.0%)**
-    - **Insight:** This is the undisputed champion. **Yesterday's sales volume is the single most powerful predictor of today's sales.** This confirms that sales have strong day-to-day momentum.
+The final step in the pipeline uses the trained model to generate concrete, actionable recommendations for the next business day.
 
-2.  **`day_of_week` (Importance: 16.4%)**
-    - **Insight:** The day of the week is the second most critical factor. This proves the model has learned a clear **weekly sales cycle** (e.g., sales patterns on weekends are different from weekdays).
+- **Process:** The script forecasts sales for the day following the last date in the dataset. It does this for each product variety by constructing the necessary features (last day's sales, day of the week, etc.) and feeding them to the model.
+- **Output:** The result is a clear, easy-to-read table that provides a specific stock recommendation for each product.
 
-3.  **Other Features (e.g., `Variety_Ensalada`, `day_of_month`)**
-    - **Insight:** Specific product types and the day within the month provide the remaining ~7% of the information, helping the model make finer adjustments to its predictions.
+**Example of Final Output:**
 
-**Conclusion:** The model's "secret" is that this is a heavily time-dependent problem. Its success relies on understanding the powerful influence of **recent history** and **weekly seasonality**.
+| Variety | Predicted_Sales_kg | Recommendation |
+| :--- | :--- | :--- |
+| Ensalada | 52.34 | Stock at least 57.34 kg |
+| Pera | 46.12 | Stock at least 51.12 kg |
+| Rama | 41.50 | Stock at least 46.50 kg |
+| ... | ... | ... |
 
 ---
 
@@ -62,8 +63,12 @@ We asked the model which clues (features) it found most important for making its
     ```bash
     python predictive_model.py
     ```
+4.  Review the full report in the terminal, which includes profitability analysis and the final purchase recommendations.
 
-## Next Steps
+## Future Improvements
 
-- **Prediction Function:** Create a function that uses the trained model to forecast sales for a specific future date.
-- **Actionable Recommendations:** Translate the numerical prediction into a human-readable business suggestion (e.g., "Recommendation: Order X kg of 'Tomato Pera' for tomorrow").
+With the core functionality complete, future enhancements could include:
+- **Hyperparameter Tuning:** Fine-tuning the `RandomForestRegressor` model to potentially improve its accuracy.
+- **Advanced Feature Engineering:** Incorporating external data like public holidays, weather forecasts, or promotional events.
+- **Intelligent Stock Management:** Implementing a system based on batch/lot expiration dates to trigger automatic offers and reduce waste.
+- **Deployment:** Packaging the script into a simple web application (using Streamlit or Flask) or an automated daily email report.
