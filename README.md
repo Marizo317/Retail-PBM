@@ -56,11 +56,3 @@ The final step in the pipeline uses the trained model to generate concrete, acti
     python predictive_model.py
     ```
 4.  Review the full report in the terminal, which includes profitability analysis and the final purchase recommendations.
-
-## Future Improvements
-
-With the core functionality complete, future enhancements could include:
-- **Hyperparameter Tuning:** Fine-tuning the `RandomForestRegressor` model to potentially improve its accuracy.
-- **Advanced Feature Engineering:** Incorporating external data like public holidays, weather forecasts, or promotional events.
-- **Intelligent Stock Management:** Implementing a system based on batch/lot expiration dates to trigger automatic offers and reduce waste.
-- **Deployment:** Packaging the script into a simple web application (using Streamlit or Flask) or an automated daily email report.
