@@ -42,7 +42,7 @@ def run_profitability_analysis(df):
     monthly_profit = df_time_analysis['Profit'].sum()
     monthly_waste_cost = df_time_analysis['Waste_Cost'].sum()
     monthly_net_profit = monthly_profit - monthly_waste_cost
-    monthly_profit_status = " PROFITABLE" if monthly_net_profit > 0 else " NOT PROFITABLE"
+    monthly_profit_status = "✅ PROFITABLE" if monthly_net_profit > 0 else "❌ NOT PROFITABLE"
     
     print("\n----------------- MONTHLY SUMMARY -----------------")
     print(f"Estimated Monthly Net Profit: €{monthly_net_profit:.2f}")

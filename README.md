@@ -14,7 +14,7 @@ This module provides a detailed report on business performance based on historic
 
 - **Financial Metrics:** Automatically calculates KPIs like Revenue, Gross Profit, and Net Profit after accounting for the cost of unsold stock (waste).
 - **Time-Based Reporting:** Aggregates financial data to generate clear monthly and weekly performance summaries.
-    - **Key Feature:** The script analyzes Net Profit and **returns a clear status (e.g.,  PROFITABLE /  NOT PROFITABLE)** for each period.
+    - **Key Feature:** The script analyzes Net Profit and **returns a clear status (e.g., ✅ PROFITABLE / ❌ NOT PROFITABLE)** for each period.
 - **Product Performance Analysis:** Groups data by product variety to generate a detailed report, including:
     - A full performance table with sales, gross profit, waste cost, and net profit per variety.
     - The explicit **Top 3 & Bottom 3** best-selling products by quantity.
